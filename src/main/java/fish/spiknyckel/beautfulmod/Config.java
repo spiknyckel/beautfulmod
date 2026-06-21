@@ -122,8 +122,8 @@ public class Config {
 //	public static boolean disableMoodSoundAndCheckLight = false;
 //	public static boolean disableRealmsButton = false;
 //	public static boolean dynamicServerListUpdates = false;
-//	public static boolean elytraFix = false;
-//	public static boolean elytraCancellation = false;
+	public static ConfigBoolean elytraFix = new ConfigBoolean(false, "elytraFix");
+	public static ConfigBoolean elytraCancellation = new ConfigBoolean(false, "elytraCancellation");
 //	public static boolean extendedChat = false;
 //	public static boolean extendedCreativeHotbar = false;
 //	public static boolean fixBlock36Particles = false;
@@ -136,7 +136,6 @@ public class Config {
 //	public static boolean lightUpdates = true;
 //	public static boolean lockYaw = false;
 //	public static boolean miningGhostBlockFix = false;
-//	public static boolean noClip = false;
 	public static ConfigBoolean noClip = new ConfigBoolean(false, "noClip");
 	public static ConfigBoolean noFall = new ConfigBoolean(false, "noFall");
 	//	public static boolean performanceImprovements = false;
@@ -225,6 +224,8 @@ public class Config {
 		clientEntityUpdates,
 		clickToCopyChat,
 		deathLocation,
+		elytraFix,
+		elytraCancellation,
 		respawnOnDeath,
 		noFall,
 		noClip,

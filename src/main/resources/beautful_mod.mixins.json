@@ -18,7 +18,8 @@
     "MinecraftMixin",
     "noclip.GameRendererMixin",
     "noclip.PlayerEntityMixin",
-    "noclip.WorldMixin"
+    "noclip.WorldMixin",
+    "LocalClientPlayerEntityMixin"
   ],
   "server": [
   ],
