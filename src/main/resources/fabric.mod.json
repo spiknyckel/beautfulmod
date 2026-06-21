@@ -1,0 +1,28 @@
+{
+	"schemaVersion": 1,
+	"id": "example_mod",
+	"version": "b1.0.0",
+	"name": "Beautful Mod",
+	"description": "This is an example description! Tell everyone what your mod is about!",
+	"authors": [
+		"Spiknyckel"
+	],
+	"contact": {
+	},
+	"license": "WTFPL2",
+	"icon": "assets/beautful_mod/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"init": [
+			"fish.spiknyckel.beautfulmod.BeautfulMod"
+		]
+	},
+	"mixins": [
+    "beautful_mod.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.17.3",
+		"minecraft": "1.12.2",
+		"osl-entrypoints": ">=0.4.0"
+	}
+}

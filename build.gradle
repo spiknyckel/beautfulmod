@@ -1,0 +1,23 @@
+plugins {
+	id 'java'
+	id 'net.fabricmc.fabric-loom-remap' version '1.17.11'
+	id 'ploceus' version '1.17.4'
+}
+
+loom {
+}
+
+ploceus {
+	setIntermediaryGeneration(1)
+}
+
+dependencies {
+	minecraft "com.mojang:minecraft:${project.minecraft_version}"
+	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+
+	exceptions ploceus.raven(project.raven_build)
+	signatures ploceus.sparrow(project.sparrow_build)
+	mappings ploceus.featherMappings(project.feather_build)
+
+	ploceus.dependOsl(project.osl_version)
+}

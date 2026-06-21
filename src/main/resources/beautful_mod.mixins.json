@@ -1,0 +1,25 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "fish.spiknyckel.beautfulmod.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+  ],
+  "client": [
+    "BlockEntityRenderDispatcherMixin",
+    "ClientPlayerInteractionManagerMixin",
+    "ClientPlayNetworkHandlerMixin",
+    "GameGuiMixin",
+    "GameMenuScreenMixin",
+    "MinecraftMixin",
+    "MixinClientWorld",
+    "noclip.GameRendererMixin",
+    "noclip.PlayerEntityMixin",
+    "noclip.WorldMixin"
+  ],
+  "server": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+	}
+}
