@@ -9,7 +9,7 @@ public class BooleanEntry extends StandardRowEntry<BooleanEntry> {
 	private Config.ConfigBoolean configOption;
 
 	public BooleanEntry(Config.ConfigBoolean option, boolean reset) {
-		super(option.getName(), true, reset, "");
+		super(option.getName(), true, reset, option.getDescription());
 
 		this.configOption = option;
 		this.button = new ButtonWidget(0, 0, 0, 100, 20, option.get().toString());
@@ -46,5 +46,10 @@ public class BooleanEntry extends StandardRowEntry<BooleanEntry> {
 	@Override
 	protected void mouseUp(int x, int y, int button) {
 		this.button.mouseReleased(x, y);
+	}
+
+	@Override
+	protected boolean isResetEnabled() {
+		return this.configOption.get() != this.configOption.getDefaultValue();
 	}
 }

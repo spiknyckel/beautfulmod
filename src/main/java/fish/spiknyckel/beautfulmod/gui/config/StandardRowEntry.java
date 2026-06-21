@@ -53,7 +53,7 @@ public abstract class StandardRowEntry<T> extends BaseEntry<T> implements IToolt
 		if (this.info) {
 			this.infoButton.x = x + listWidth / 2 - 17;
 			this.infoButton.y = y + 2;
-			this.infoButton.active = getTooltip().length() == 0;
+			this.infoButton.active = getTooltip().length() != 0;
 			this.infoButton.render(Minecraft.getInstance(), mouseX, mouseY, partialTicks);
 		}
 	}

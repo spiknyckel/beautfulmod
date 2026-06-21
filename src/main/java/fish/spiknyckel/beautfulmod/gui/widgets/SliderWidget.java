@@ -30,6 +30,10 @@ public class SliderWidget extends ButtonWidget {
 		return this.value;
 	}
 
+	public void setValue(float v) {
+		this.value = v;
+	}
+
 
 		@Override
 	protected int getYImage(boolean hovered) {

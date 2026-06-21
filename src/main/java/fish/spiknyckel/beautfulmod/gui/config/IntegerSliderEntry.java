@@ -10,13 +10,16 @@ public class IntegerSliderEntry extends StandardRowEntry<IntegerSliderEntry> {
 	private Config.ConfigInteger configOption;
 
 	public IntegerSliderEntry(Config.ConfigInteger option, boolean reset) {
-		super(option.getName(), true, reset, "");
+		super(option.getName(), true, reset, option.getDescription());
 
 		this.configOption = option;
 		this.slider = new SliderWidget(0, 0, 0, 100, 20, option.asFloatRange());
 
 		onAction((source) -> configOption.set(configOption.calculateValue(slider.getValue())));
-		onReset((source) -> configOption.set(configOption.getDefaultValue()));
+		onReset((source) -> {
+			configOption.set(configOption.getDefaultValue());
+			this.slider.setValue(this.configOption.asFloatRange());
+		});
 	}
 
 	public SliderWidget getButton() { return slider; }
@@ -46,8 +49,14 @@ public class IntegerSliderEntry extends StandardRowEntry<IntegerSliderEntry> {
 
 	@Override
 	protected void mouseUp(int x, int y, int button) {
-		this.slider.mouseReleased(x, y);
-		this.performAction();
+		if (this.slider.dragging) {
+			this.slider.mouseReleased(x, y);
+			this.performAction();
+		}
 	}
 
+	@Override
+	protected boolean isResetEnabled() {
+		return !this.configOption.get().equals(this.configOption.getDefaultValue());
+	}
 }

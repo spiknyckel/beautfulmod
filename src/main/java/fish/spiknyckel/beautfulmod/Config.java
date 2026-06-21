@@ -19,10 +19,18 @@ public class Config {
 		T value;
 		T defaultValue;
 		String name;
+		String description = "";
 		ConfigValue(T v, String name) {
 			this.value = v;
 			this.name = name;
 			this.defaultValue = v;
+		}
+
+		ConfigValue(T v, String name, String description) {
+			this.value = v;
+			this.name = name;
+			this.defaultValue = v;
+			this.description = description;
 		}
 
 		public void set(T v) {
@@ -37,6 +45,10 @@ public class Config {
 			return this.name;
 		}
 
+		public String getDescription() {
+			return this.description;
+		}
+
 		public T getDefaultValue() {
 			return this.defaultValue;
 		}
@@ -46,6 +58,10 @@ public class Config {
 		ConfigBoolean(Boolean v, String name) {
 			super(v, name);
 		}
+		ConfigBoolean(Boolean v, String name, String description) {
+			super(v, name, description);
+		}
+
 	}
 
 	public static class ConfigInteger extends ConfigValue<Integer> {
@@ -56,6 +72,11 @@ public class Config {
 
 		ConfigInteger(Integer v, Integer min, Integer max, String name) {
 			super(v, name);
+			this.min = min;
+			this.max = max;
+		}
+		ConfigInteger(Integer v, Integer min, Integer max, String name, String description) {
+			super(v, name, description);
 			this.min = min;
 			this.max = max;
 		}
@@ -102,29 +123,30 @@ public class Config {
 
 
 	// Booleans<
-	public static ConfigBoolean alwaysDay = new ConfigBoolean(false, "alwaysDay");
-	public static ConfigBoolean alwaysPickBlockMaxStack = new ConfigBoolean(false, "alwaysPickBlockMaxStack");
-	public static ConfigBoolean alwaysRenderTileEntities = new ConfigBoolean(false, "alwaysRenderTileEntities");
+	public static ConfigBoolean alwaysDay = new ConfigBoolean(false, "alwaysDay", "makes it always day");
+	public static ConfigBoolean alwaysPickBlockMaxStack = new ConfigBoolean(false, "alwaysPickBlockMaxStack", "gets a full stack when doing pick block in creative");
+	public static ConfigBoolean alwaysRenderTileEntities = new ConfigBoolean(false, "alwaysRenderTileEntities", "render tile entities however far away they are");
 //	public static boolean alwaysShowPing = false;
-	public static ConfigBoolean alwaysSingleplayerCheats = new ConfigBoolean(false, "alwaysSingleplayerCheats");
+	public static ConfigBoolean alwaysSingleplayerCheats = new ConfigBoolean(false, "alwaysSingleplayerCheats", "always allow all commands in singleplayer");
 	//	public static boolean autoGenKeybinds = false;
-	public static ConfigBoolean carpetAccurateBlockPlacement = new ConfigBoolean(false, "carpetAccurateBlockPlacement");
+	public static ConfigBoolean carpetAccurateBlockPlacement = new ConfigBoolean(false, "carpetAccurateBlockPlacement", "carpet accurate block placement protocol");
 
 //	@Config.RequiresMcRestart
 //	public static boolean chestWithoutTESR = false;
-	public static ConfigBoolean clickBlockMining = new ConfigBoolean(false, "clickBlockMining");
-	public static ConfigBoolean clientEntityUpdates = new ConfigBoolean(true, "clientEntityUpdates");
-	public static ConfigBoolean clickToCopyChat = new ConfigBoolean(false, "clickToCopyChat");;
+	public static ConfigBoolean clickBlockMining = new ConfigBoolean(false, "clickBlockMining", "hack");
+	public static ConfigBoolean clientEntityUpdates = new ConfigBoolean(true, "clientEntityUpdates", "toggles entity updates");
+	public static ConfigBoolean clickToCopyChat = new ConfigBoolean(false, "clickToCopyChat", "shift clicking messages copies them to clipboard");;
 //	public static boolean colouredFireworksTrail = false;
 //	public static boolean craftingHax = true;
-	public static ConfigBoolean deathLocation = new ConfigBoolean(false, "deathLocation");
+	public static ConfigBoolean deathLocation = new ConfigBoolean(false, "deathLocation", "prints coordinates of death");
 	//	public static boolean derpyChicken = false;
 //	public static boolean disableMoodSoundAndCheckLight = false;
 //	public static boolean disableRealmsButton = false;
 //	public static boolean dynamicServerListUpdates = false;
-	public static ConfigBoolean elytraFix = new ConfigBoolean(false, "elytraFix");
-	public static ConfigBoolean elytraCancellation = new ConfigBoolean(false, "elytraCancellation");
-//	public static boolean extendedChat = false;
+	public static ConfigBoolean elytraFix = new ConfigBoolean(false, "elytraFix", "makes launching easier with high ping");
+	public static ConfigBoolean elytraCancellation = new ConfigBoolean(false, "elytraCancellation", "shift + space mid air to cancel elytra flight");
+	public static ConfigBoolean elytraSneakEyeHeightFix = new ConfigBoolean(false, "elytraSneakEyeHeightFix", "makes eye height not be above hitbox when sneaking (still suffocate)");
+	//	public static boolean extendedChat = false;
 //	public static boolean extendedCreativeHotbar = false;
 //	public static boolean fixBlock36Particles = false;
 //	public static boolean flightInertiaCancellation = false;
@@ -137,9 +159,9 @@ public class Config {
 //	public static boolean lockYaw = false;
 //	public static boolean miningGhostBlockFix = false;
 	public static ConfigBoolean noClip = new ConfigBoolean(false, "noClip");
-	public static ConfigBoolean noFall = new ConfigBoolean(false, "noFall");
+	public static ConfigBoolean noFall = new ConfigBoolean(false, "noFall", "no fall damage");
 	//	public static boolean performanceImprovements = false;
-	public static ConfigBoolean respawnOnDeath = new ConfigBoolean(false, "respawnOnDeath");
+	public static ConfigBoolean respawnOnDeath = new ConfigBoolean(false, "respawnOnDeath", "automatically respawn when killed");
 
 //	public static boolean rocketCooldown = false;
 //	public static boolean showArmor = true;
@@ -190,7 +212,7 @@ public class Config {
 //	public static int _speedyPlace = 4;
 //	@Config.RangeInt(min = 0)
 //	public static int reconnectTimer = 10;
-	public static ConfigInteger scoreBoardLength = new ConfigInteger(15, 1, 100, "scoreBoardLength")
+	public static ConfigInteger scoreBoardLength = new ConfigInteger(15, 1, 100, "scoreBoardLength", "changes the amount of entries on the scoreboard")
 	.addCalculator((Float f) -> {
 		if (f == 1.0F) {
 			return 9999;
@@ -226,6 +248,7 @@ public class Config {
 		deathLocation,
 		elytraFix,
 		elytraCancellation,
+		elytraSneakEyeHeightFix,
 		respawnOnDeath,
 		noFall,
 		noClip,
