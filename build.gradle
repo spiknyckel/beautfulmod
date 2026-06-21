@@ -24,3 +24,11 @@ dependencies {
 
 	ploceus.dependOsl(project.osl_version)
 }
+
+processResources {
+	inputs.property "mod_version", project.version
+
+	filesMatching("fabric.mod.json") {
+		expand "mod_version": project.version
+	}
+}

@@ -1,7 +1,7 @@
 {
 	"schemaVersion": 1,
 	"id": "beautful_mod",
-	"version": "b1.0.0",
+	"version": "${mod_version}",
 	"name": "Beautful Mod",
 	"description": "Tweaks",
 	"authors": [
