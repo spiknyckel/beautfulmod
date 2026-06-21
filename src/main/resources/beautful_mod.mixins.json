@@ -9,6 +9,7 @@
     "AbstractCommandMixin",
     "BlockEntityRenderDispatcherMixin",
     "ChatScreenMixin",
+    "ChatGuiMixin",
     "ClientPlayerInteractionManagerMixin",
     "ClientPlayNetworkHandlerMixin",
     "ClientWorldMixin",
