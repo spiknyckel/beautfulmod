@@ -7,21 +7,22 @@
   ],
   "client": [
     "AbstractCommandMixin",
+    "BeaconRendererMixin",
     "BlockEntityRenderDispatcherMixin",
-    "ChatScreenMixin",
     "ChatGuiMixin",
+    "ChatScreenMixin",
     "ClientPlayerInteractionManagerMixin",
     "ClientPlayNetworkHandlerMixin",
     "ClientWorldMixin",
+    "CraftingManagerMixin",
     "GameGuiMixin",
     "GameMenuScreenMixin",
+    "LocalClientPlayerEntityMixin",
     "MinecraftMixin",
+    "PlayerEntityMixin",
     "noclip.GameRendererMixin",
     "noclip.PlayerEntityMixin",
-    "noclip.WorldMixin",
-    "LocalClientPlayerEntityMixin",
-    "PlayerEntityMixin",
-    "CraftingManagerMixin"
+    "noclip.WorldMixin"
   ],
   "server": [
   ],

@@ -167,7 +167,8 @@ public class Config {
 //	public static boolean showArmor = true;
 //	@Config.RequiresMcRestart
 //	public static boolean showBarrierBlocks = false;
-//	public static boolean showBlockBreakingParticles = true;
+	public static ConfigBoolean showBeaconBeam = new ConfigBoolean(true, "showBeaconBeam", "toggles beacon beam rendering");
+	//	public static boolean showBlockBreakingParticles = true;
 //	public static boolean showBlockSelectorUnderwater = false;
 //	public static boolean showCenteredPlants = false;
 //	public static boolean showClearLava = false;
@@ -251,6 +252,7 @@ public class Config {
 		elytraCancellation,
 		elytraSneakEyeHeightFix,
 		respawnOnDeath,
+		showBeaconBeam,
 		noFall,
 		noClip,
 		alwaysSingleplayerCheats,
