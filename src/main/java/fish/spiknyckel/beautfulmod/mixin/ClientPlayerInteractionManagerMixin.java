@@ -7,16 +7,34 @@ import net.minecraft.block.*;
 import net.minecraft.client.ClientPlayerInteractionManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.living.player.LocalClientPlayerEntity;
+import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.crafting.recipe.Recipe;
 import net.minecraft.entity.living.player.PlayerEntity;
+import net.minecraft.inventory.menu.ActionType;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.InteractionHand;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.*;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ClientPlayerInteractionManager.class)
-public class ClientPlayerInteractionManagerMixin {
+public abstract class ClientPlayerInteractionManagerMixin {
+	@Shadow
+	public abstract ItemStack clickSlot(int menuId, int slotId, int clickData, ActionType actionType, PlayerEntity player);
+
+	@Inject(method = "placeRecipe", at = @At("RETURN"))
+	private void craftingHax(int id, Recipe recipe, boolean shift, PlayerEntity player, CallbackInfo ci) {
+		if (!Config.craftingHax.get()) return;
+		if (Screen.isShiftDown() && Screen.isControlDown()) {
+			this.clickSlot(id, 0, 1, Screen.isAltDown() ? ActionType.THROW : ActionType.QUICK_MOVE, player);
+		}
+	}
+
+
 	@ModifyVariable(
 		method = "useBlock",
 		at = @At(

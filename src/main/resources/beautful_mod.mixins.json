@@ -20,7 +20,8 @@
     "noclip.PlayerEntityMixin",
     "noclip.WorldMixin",
     "LocalClientPlayerEntityMixin",
-    "PlayerEntityMixin"
+    "PlayerEntityMixin",
+    "CraftingManagerMixin"
   ],
   "server": [
   ],

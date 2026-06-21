@@ -137,7 +137,7 @@ public class Config {
 	public static ConfigBoolean clientEntityUpdates = new ConfigBoolean(true, "clientEntityUpdates", "toggles entity updates");
 	public static ConfigBoolean clickToCopyChat = new ConfigBoolean(false, "clickToCopyChat", "shift clicking messages copies them to clipboard");;
 //	public static boolean colouredFireworksTrail = false;
-//	public static boolean craftingHax = true;
+	public static ConfigBoolean craftingHax = new ConfigBoolean(true, "craftingHax", "ctrl crafting");
 	public static ConfigBoolean deathLocation = new ConfigBoolean(false, "deathLocation", "prints coordinates of death");
 	//	public static boolean derpyChicken = false;
 //	public static boolean disableMoodSoundAndCheckLight = false;
@@ -245,6 +245,7 @@ public class Config {
 		clickBlockMining,
 		clientEntityUpdates,
 		clickToCopyChat,
+		craftingHax,
 		deathLocation,
 		elytraFix,
 		elytraCancellation,
