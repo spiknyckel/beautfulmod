@@ -114,7 +114,7 @@ public class Config {
 //	public static boolean chestWithoutTESR = false;
 	public static ConfigBoolean clickBlockMining = new ConfigBoolean(false, "clickBlockMining");
 	public static ConfigBoolean clientEntityUpdates = new ConfigBoolean(true, "clientEntityUpdates");
-//	public static boolean clickToCopyChat = false;
+	public static ConfigBoolean clickToCopyChat = new ConfigBoolean(false, "clickToCopyChat");;
 //	public static boolean colouredFireworksTrail = false;
 //	public static boolean craftingHax = true;
 	public static ConfigBoolean deathLocation = new ConfigBoolean(false, "deathLocation");
@@ -223,6 +223,7 @@ public class Config {
 		carpetAccurateBlockPlacement,
 		clickBlockMining,
 		clientEntityUpdates,
+		clickToCopyChat,
 		deathLocation,
 		respawnOnDeath,
 		noFall,

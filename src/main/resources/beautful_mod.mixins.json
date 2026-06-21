@@ -6,17 +6,18 @@
   "mixins": [
   ],
   "client": [
+    "AbstractCommandMixin",
     "BlockEntityRenderDispatcherMixin",
+    "ChatScreenMixin",
     "ClientPlayerInteractionManagerMixin",
     "ClientPlayNetworkHandlerMixin",
+    "ClientWorldMixin",
     "GameGuiMixin",
     "GameMenuScreenMixin",
     "MinecraftMixin",
-    "ClientWorldMixin",
     "noclip.GameRendererMixin",
     "noclip.PlayerEntityMixin",
-    "noclip.WorldMixin",
-    "AbstractCommandMixin"
+    "noclip.WorldMixin"
   ],
   "server": [
   ],
