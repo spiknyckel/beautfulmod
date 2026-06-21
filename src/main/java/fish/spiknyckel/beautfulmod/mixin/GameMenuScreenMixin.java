@@ -60,6 +60,10 @@ public class GameMenuScreenMixin extends Screen {
 	 */
 	@Unique
 	private void injectButtons(GameMenuScreen gui, List buttonList) {
+		// Lol
+		if (true) {
+			return;
+		}
 		int insertAtYPos = 0;
 
 		for (Object obj : buttonList) {

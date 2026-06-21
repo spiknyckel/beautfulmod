@@ -15,7 +15,10 @@
 	"entrypoints": {
 		"init": [
 			"fish.spiknyckel.beautfulmod.BeautfulMod"
-		]
+		],
+    "modmenu": [
+      "fish.spiknyckel.beautfulmod.gui.ModMenuEntry"
+    ]
 	},
 	"mixins": [
     "beautful_mod.mixins.json"

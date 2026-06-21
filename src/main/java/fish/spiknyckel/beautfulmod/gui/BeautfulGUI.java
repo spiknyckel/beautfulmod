@@ -4,6 +4,7 @@ import fish.spiknyckel.beautfulmod.Config;
 import fish.spiknyckel.beautfulmod.gui.config.BeautfulConfigList;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
+import org.lwjgl.input.Keyboard;
 
 import java.util.List;
 
@@ -74,6 +75,9 @@ public class BeautfulGUI extends Screen {
 	@Override
 	protected void keyPressed(char typedChar, int keyCode) {
 		//list.keyDown(typedChar, keyCode);
+		if (keyCode == Keyboard.KEY_ESCAPE) {
+			list.onClose();
+		}
 		super.keyPressed(typedChar, keyCode);
 	}
 
