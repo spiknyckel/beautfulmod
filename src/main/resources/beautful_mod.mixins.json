@@ -12,10 +12,11 @@
     "GameGuiMixin",
     "GameMenuScreenMixin",
     "MinecraftMixin",
-    "MixinClientWorld",
+    "ClientWorldMixin",
     "noclip.GameRendererMixin",
     "noclip.PlayerEntityMixin",
-    "noclip.WorldMixin"
+    "noclip.WorldMixin",
+    "AbstractCommandMixin"
   ],
   "server": [
   ],

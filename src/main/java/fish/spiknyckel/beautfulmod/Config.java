@@ -106,8 +106,8 @@ public class Config {
 	public static ConfigBoolean alwaysPickBlockMaxStack = new ConfigBoolean(false, "alwaysPickBlockMaxStack");
 	public static ConfigBoolean alwaysRenderTileEntities = new ConfigBoolean(false, "alwaysRenderTileEntities");
 //	public static boolean alwaysShowPing = false;
-//	public static boolean alwaysSingleplayerCheats = false;
-//	public static boolean autoGenKeybinds = false;
+	public static ConfigBoolean alwaysSingleplayerCheats = new ConfigBoolean(false, "alwaysSingleplayerCheats");
+	//	public static boolean autoGenKeybinds = false;
 	public static ConfigBoolean carpetAccurateBlockPlacement = new ConfigBoolean(false, "carpetAccurateBlockPlacement");
 
 //	@Config.RequiresMcRestart
@@ -227,6 +227,7 @@ public class Config {
 		respawnOnDeath,
 		noFall,
 		noClip,
+		alwaysSingleplayerCheats,
 	};
 
 	public static ConfigInteger[] INTEGERS = new ConfigInteger[] {

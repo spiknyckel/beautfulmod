@@ -13,8 +13,8 @@ import net.minecraft.world.storage.WorldStorage;
 import org.spongepowered.asm.mixin.Mixin;
 
 @Mixin(ClientWorld.class)
-public abstract class MixinClientWorld extends World {
-	protected MixinClientWorld(WorldStorage storage, WorldData data, Dimension dimension, Profiler profiler, boolean isClient) {
+public abstract class ClientWorldMixin extends World {
+	protected ClientWorldMixin(WorldStorage storage, WorldData data, Dimension dimension, Profiler profiler, boolean isClient) {
 		super(storage, data, dimension, profiler, isClient);
 	}
 
