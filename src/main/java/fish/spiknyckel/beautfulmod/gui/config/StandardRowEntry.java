@@ -1,5 +1,6 @@
 package fish.spiknyckel.beautfulmod.gui.config;
 
+import fish.spiknyckel.beautfulmod.utils.RenderHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import org.jetbrains.annotations.NotNull;
@@ -53,14 +54,14 @@ public abstract class StandardRowEntry<T> extends BaseEntry<T> implements IToolt
 		if (this.info) {
 			this.infoButton.x = x + listWidth / 2 - 17;
 			this.infoButton.y = y + 2;
-			this.infoButton.active = getTooltip().length() != 0;
+			this.infoButton.active = !getTooltip().isEmpty();
 			this.infoButton.render(Minecraft.getInstance(), mouseX, mouseY, partialTicks);
 		}
 	}
 
 	public void drawTooltip(int slotIndex, int x, int y, int mouseX, int mouseY, int listWidth, int listHeight, int slotWidth, int slotHeight,  float partialTicks) {
-		if (this.info && getTooltip().length() > 0 && infoButton.isHovered()) {
-			// RenderHelper.drawGuiInfoBox(Minecraft.getInstance().textRenderer, getTooltip(), mouseY + 5, listWidth, slotWidth, listHeight, 48);
+		if (this.info && !getTooltip().isEmpty() && infoButton.isHovered()) {
+			RenderHelper.drawGuiInfoBox(Minecraft.getInstance().textRenderer, getTooltip(), mouseY + 5, listWidth, slotWidth, listHeight, 48);
 		}
 	}
 

@@ -2,6 +2,7 @@ package fish.spiknyckel.beautfulmod.gui;
 
 import fish.spiknyckel.beautfulmod.Config;
 import fish.spiknyckel.beautfulmod.gui.config.BaseEntry;
+import fish.spiknyckel.beautfulmod.gui.config.ITooltipEntry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.widget.EntryListWidget;
 
@@ -46,6 +47,21 @@ public abstract class ConfigList extends EntryListWidget {
 	@Override
 	protected int size() {
 		return entries.size();
+	}
+
+	public void drawTooltip(int mouseX, int mouseY, float partialTicks) {
+		int insideLeft = this.minX + this.width / 2 - this.getRowWidth() / 2 + 2;
+		int insideTop = this.minY + 4 - (int)this.scrollAmount;
+		int l = this.entryHeight - 4;
+
+		for (int i = 0; i < this.size(); i++) {
+			int k = insideTop + i * this.entryHeight + this.headerHeight;
+
+			Entry entry = getEntry(i);
+			if (entry instanceof ITooltipEntry) {
+				((ITooltipEntry) entry).drawTooltip(i, insideLeft, k, mouseX, mouseY, this.getRowWidth(), this.height, this.width, l, partialTicks);
+			}
+		}
 	}
 
 

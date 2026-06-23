@@ -54,7 +54,7 @@ public class BeautfulGUI extends Screen {
 	}
 
 	public void drawTooltip(int mouseX, int mouseY, float partialTicks) {
-		//list.drawTooltip(mouseX, mouseY, partialTicks);
+		list.drawTooltip(mouseX, mouseY, partialTicks);
 	}
 	//endregion
 

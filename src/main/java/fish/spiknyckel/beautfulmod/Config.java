@@ -146,7 +146,7 @@ public class Config {
 	public static ConfigBoolean elytraFix = new ConfigBoolean(false, "elytraFix", "makes launching easier with high ping");
 	public static ConfigBoolean elytraCancellation = new ConfigBoolean(false, "elytraCancellation", "shift + space mid air to cancel elytra flight");
 	public static ConfigBoolean elytraSneakEyeHeightFix = new ConfigBoolean(false, "elytraSneakEyeHeightFix", "makes eye height not be above hitbox when sneaking (still suffocate)");
-	//	public static boolean extendedChat = false;
+	public static ConfigBoolean extendedChat = new ConfigBoolean(false, "extendedChat", "makes chat messages not go away");
 //	public static boolean extendedCreativeHotbar = false;
 //	public static boolean fixBlock36Particles = false;
 //	public static boolean flightInertiaCancellation = false;
@@ -251,6 +251,7 @@ public class Config {
 		elytraFix,
 		elytraCancellation,
 		elytraSneakEyeHeightFix,
+		extendedChat,
 		respawnOnDeath,
 		showBeaconBeam,
 		noFall,
