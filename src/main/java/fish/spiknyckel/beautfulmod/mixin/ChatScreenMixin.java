@@ -11,7 +11,9 @@ import net.minecraft.text.Text;
 import org.lwjgl.input.Mouse;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.awt.*;
@@ -38,5 +40,10 @@ public class ChatScreenMixin {
 				}
 			}
 		}
+	}
+
+	@ModifyConstant(method = "init", constant = @Constant(intValue = 256))
+	private int changeInputLength(int constant) {
+		return Config.chatInputLength.get();
 	}
 }

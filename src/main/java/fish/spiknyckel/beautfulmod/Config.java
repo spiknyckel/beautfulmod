@@ -146,7 +146,7 @@ public class Config {
 	public static ConfigBoolean elytraFix = new ConfigBoolean(false, "elytraFix", "makes launching easier with high ping");
 	public static ConfigBoolean elytraCancellation = new ConfigBoolean(false, "elytraCancellation", "shift + space mid air to cancel elytra flight");
 	public static ConfigBoolean elytraSneakEyeHeightFix = new ConfigBoolean(false, "elytraSneakEyeHeightFix", "makes eye height not be above hitbox when sneaking (still suffocate)");
-	public static ConfigBoolean extendedChat = new ConfigBoolean(false, "extendedChat", "makes chat messages not go away");
+	// public static ConfigBoolean extendedChat = new ConfigBoolean(false, "extendedChat", "makes chat messages not go away");
 //	public static boolean extendedCreativeHotbar = false;
 //	public static boolean fixBlock36Particles = false;
 //	public static boolean flightInertiaCancellation = false;
@@ -216,7 +216,7 @@ public class Config {
 	public static ConfigInteger scoreBoardLength = new ConfigInteger(15, 1, 100, "scoreBoardLength", "changes the amount of entries on the scoreboard")
 	.addCalculator((Float f) -> {
 		if (f == 1.0F) {
-			return 9999;
+			return Integer.MAX_VALUE;
 		}
 		return null;
 	})
@@ -226,6 +226,42 @@ public class Config {
 		}
 		return null;
 	});
+
+	public static ConfigInteger chatScrollLength = new ConfigInteger(100, 0, 2000, "chatScrollLength", "amount of lines in the chat history")
+		.addCalculator((Float f) -> {
+			if (f == 1.0F) {
+				return Integer.MAX_VALUE;
+			}
+			return null;
+		})
+		.addMessage((Float f) -> {
+			if (f == 1.0F) {
+				return "No limit!";
+			}
+			if (f == 0.0F) {
+				return "No chat!";
+			}
+			return null;
+		});
+
+	public static ConfigInteger chatInputLength = new ConfigInteger(256, 0, 2048, "chatInputLength", "amount of characters in chat input\nNote: need to be split every 256 chars still due to server")
+		.addCalculator((Float f) -> {
+			if (f == 1.0F) {
+				return Integer.MAX_VALUE;
+			}
+			return null;
+		})
+		.addMessage((Float f) -> {
+			if (f == 1.0F) {
+				return "No limit!)";
+			}
+			if (f == 0.0F) {
+				return "No chat!";
+			}
+			return null;
+		});
+
+
 
 //
 //	// Sliders
@@ -251,7 +287,6 @@ public class Config {
 		elytraFix,
 		elytraCancellation,
 		elytraSneakEyeHeightFix,
-		extendedChat,
 		respawnOnDeath,
 		showBeaconBeam,
 		noFall,
@@ -261,6 +296,8 @@ public class Config {
 
 	public static ConfigInteger[] INTEGERS = new ConfigInteger[] {
 		scoreBoardLength,
+		chatScrollLength,
+		chatInputLength
 	};
 
 	private static final Map<String, ConfigValue<?>> SETTINGS = createSettings();
