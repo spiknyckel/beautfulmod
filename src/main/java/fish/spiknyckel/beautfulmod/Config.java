@@ -4,14 +4,12 @@ import com.google.gson.*;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.Callable;
 import java.util.function.Function;
 
 public class Config {
@@ -64,11 +62,74 @@ public class Config {
 
 	}
 
+	public static class ConfigFloat extends ConfigValue<Float> {
+		float min;
+		float max;
+		@Nullable Function<Float, Float> customCalculator;
+		@Nullable Function<Float, String> customMessage;
+
+		ConfigFloat(Float v, Float min, Float max, String name) {
+			super(v, name);
+			this.min = min;
+			this.max = max;
+		}
+		ConfigFloat(Float v, Float min, Float max, String name, String description) {
+			super(v, name, description);
+			this.min = min;
+			this.max = max;
+		}
+
+		public float asFloatRange() {
+			return Math.clamp((float) (value - min) / (max - min), 0.0F, 1.0F);
+		}
+
+		private ConfigFloat addCalculator(Function<Float, Float> c) {
+			this.customCalculator = c;
+			return this;
+		}
+
+		private ConfigFloat addMessage(Function<Float, String> m) {
+			this.customMessage = m;
+			return this;
+		}
+
+		public Float getMin() {
+			return min;
+		}
+
+		public Float getMax() {
+			return max;
+		}
+
+		public Float calculateValue(float f) {
+			if (customCalculator != null) {
+				Float v = customCalculator.apply(f);
+				if (v != null) {
+					return v;
+				}
+			}
+
+			return ((f * (max - min)) + min);
+		}
+
+		public String message(float f) {
+			if (customMessage != null) {
+				String s = customMessage.apply(f);
+				if (s != null) {
+					return s;
+				}
+			}
+
+			return "%.2f".formatted(calculateValue(f));
+		}
+
+	}
+
 	public static class ConfigInteger extends ConfigValue<Integer> {
 		int min;
 		int max;
-		Function<Float, Integer> customCalculator;
-		Function<Float, String> customMessage;
+		@Nullable Function<Float, Integer> customCalculator;
+		@Nullable Function<Float, String> customMessage;
 
 		ConfigInteger(Integer v, Integer min, Integer max, String name) {
 			super(v, name);
@@ -104,18 +165,24 @@ public class Config {
 		}
 
 		public Integer calculateValue(float f) {
-			Integer v = customCalculator.apply(f);
-			if (v != null) {
-				return v;
+			if (customCalculator != null) {
+				Integer v = customCalculator.apply(f);
+				if (v != null) {
+					return v;
+				}
 			}
+
 			return (int) Math.round(((f * (max - min)) + min));
 		}
 
 		public String message(float f) {
-			String s = customMessage.apply(f);
-			if (s != null) {
-				return s;
+			if (customMessage != null) {
+				String s = customMessage.apply(f);
+				if (s != null) {
+					return s;
+				}
 			}
+
 			return calculateValue(f).toString();
 		}
 
@@ -261,6 +328,8 @@ public class Config {
 			return null;
 		});
 
+	public static ConfigFloat sneakEyeHeight = new ConfigFloat(1.54F, -1.0F, 3.0F, "eyeHeight", "where your eyes are");
+
 
 
 //
@@ -300,6 +369,10 @@ public class Config {
 		chatInputLength
 	};
 
+	public static ConfigFloat[] FLOATS = new ConfigFloat[] {
+		sneakEyeHeight
+	};
+
 	private static final Map<String, ConfigValue<?>> SETTINGS = createSettings();
 
 	private static Map<String, ConfigValue<?>> createSettings() {
@@ -326,6 +399,11 @@ public class Config {
 			integers.addProperty(i.getName(), i.get());
 		}
 		root.add("integers", integers);
+		JsonObject floats = new JsonObject();
+		for (ConfigValue<Float> i : FLOATS) {
+			floats.addProperty(i.getName(), i.get());
+		}
+		root.add("floats", floats);
 
 
 		try {
@@ -351,23 +429,43 @@ public class Config {
 			JsonElement jsonTree = JsonParser.parseString(json);
 			if (jsonTree.isJsonObject()) {
 				JsonObject root = jsonTree.getAsJsonObject();
-				JsonObject booleans = root.get("booleans").getAsJsonObject();
-				JsonObject integers = root.get("integers").getAsJsonObject();
-				for (Map.Entry<String, JsonElement> entry : booleans.entrySet()) {
-					ConfigValue<Boolean> v = (ConfigValue<Boolean>) SETTINGS.get(entry.getKey());
-					if (v == null) {
-						BeautfulMod.LOGGER.info("Could not find " + entry.getKey());
-						continue;
+				JsonElement booleansE = root.get("booleans");
+				JsonElement integersE = root.get("integers");
+				JsonElement floatsE = root.get("floats");
+				if (booleansE != null) {
+					JsonObject booleans = booleansE.getAsJsonObject();
+					for (Map.Entry<String, JsonElement> entry : booleans.entrySet()) {
+						ConfigValue<Boolean> v = (ConfigValue<Boolean>) SETTINGS.get(entry.getKey());
+						if (v == null) {
+							BeautfulMod.LOGGER.info("Could not find " + entry.getKey());
+							continue;
+						}
+						v.set(entry.getValue().getAsBoolean());
 					}
-					v.set(entry.getValue().getAsBoolean());
 				}
 
-				for (Map.Entry<String, JsonElement> entry : integers.entrySet()) {
-					ConfigValue<Integer> v = (ConfigValue<Integer>) SETTINGS.get(entry.getKey());
-					if (v == null) {
-						continue;
+				if (integersE != null) {
+					JsonObject integers = integersE.getAsJsonObject();
+
+					for (Map.Entry<String, JsonElement> entry : integers.entrySet()) {
+						ConfigValue<Integer> v = (ConfigValue<Integer>) SETTINGS.get(entry.getKey());
+						if (v == null) {
+							continue;
+						}
+						v.set(entry.getValue().getAsInt());
 					}
-					v.set(entry.getValue().getAsInt());
+				}
+
+				if (floatsE != null) {
+					JsonObject floats = floatsE.getAsJsonObject();
+
+					for (Map.Entry<String, JsonElement> entry : floats.entrySet()) {
+						ConfigValue<Float> v = (ConfigValue<Float>) SETTINGS.get(entry.getKey());
+						if (v == null) {
+							continue;
+						}
+						v.set(entry.getValue().getAsFloat());
+					}
 				}
 			}
 		} catch (Exception e) {

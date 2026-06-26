@@ -20,6 +20,10 @@ public class BeautfulConfigList extends ConfigList {
 		for (Config.ConfigInteger v : Config.INTEGERS) {
 			addEntry(new IntegerSliderEntry(v, true));
 		}
+
+		for (Config.ConfigFloat v : Config.FLOATS) {
+			addEntry(new FloatSliderEntry(v, true));
+		}
 	}
 
 	@Override
